@@ -1,0 +1,17 @@
+<div class="card">
+    <div class="card__icon"></div>
+    <div class="card__container">
+        <h1 class="card__name">{{name}}</h1>
+        <p class="card__text">
+        {{#if fromMe}}
+            <span class="card__you">Вы: </span>
+        {{/if}}
+        {{text}}</p>
+    </div>
+    <div>
+        <p class="card__time">{{time}}</p>
+        {{#if unread}}
+            <div class="card__unread">{{unread}}</div>
+        {{/if}}
+    </div>
+</div>
