@@ -25,3 +25,4 @@
 Проект можно посмотреть [здесь](https://silly-fox-fd65ec.netlify.app/)
 ---
 Pull request [#1](https://github.com/Nikita-hub000/middle.messenger.praktikum.yandex/pull/2)
+
