@@ -1,5 +1,4 @@
 # Проект Chat Messenger - real-time чат с функционалом аналогичным Telegram
----
 ### Дизайн
 
 Использовались макеты: https://www.figma.com/file/jF5fFFzgGOxQeB4CmKWTiE/Chat_external_link?type=design&node-id=1-103
