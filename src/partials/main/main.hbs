@@ -1,0 +1,39 @@
+<section class="main-page">
+    <nav class="main-page__chats-menu">
+        <a class="main-page__link" href="profile.hbs">Профиль <img class="main-page__image" src="../asserts/arrow.png"/></a>
+        <form class="main-page__form">
+            <input type="text" class="main-page__find" placeholder="Поиск"/>
+        </form>
+        {{#each array}}
+            {{> main/chats/chats name=this.name time=this.time fromMe=this.fromMe unread=this.unread text=this.text}}
+        {{/each}}
+    </nav>
+    {{!-- Уже сверстано --}}
+    {{!-- <main class="main-page__chat-default">
+        <p class="main-page__default-text">Выберите чат чтобы отправить сообщение</p>
+    </main> --}} 
+    <main class="chat">
+        <div class="chat__header">
+            <div class="chat__icon"></div> {{!-- потом поменяю на img --}}
+            <h1 class="chat__name">Вадим</h1>
+            <div class="chat__menu">
+                <img src="../asserts/menu.png"/>
+                {{> modal/modal position='bottom' items=modalItemsBottom }}
+            </div>
+        </div>
+        <div class="chat__messenger">
+            {{> main/messages/messages }}
+        </div>
+        <div class="chat__footer">
+            {{> modal/modal position='top' items=modalItemsTop }}
+            <img class="chat__attach" src="../asserts/attach-file.svg"/> 
+            <form class="chat__form" action="post">
+                <input type="text" class="chat__input" placeholder="Напиши первым:)" />
+                <button type="submit" class="chat__send"></button>
+            </form>
+        </div>
+    </main>
+    {{> popup/popup isVisible=false type="form-text" title="Добавить пользователя" btnText="Добавить" errorText="Нужно ввести существующий логин" }}
+    {{> popup/popup isVisible=false type="form-text" title="Удалить пользователя" btnText="Удалить" errorText="Нужно ввести существующий логин" }}
+    {{> popup/popup isVisible=false type="agreement" title="Вы уверены?" }}
+</section>

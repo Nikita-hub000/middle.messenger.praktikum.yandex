@@ -1,0 +1,41 @@
+$color-black: #1E1E1E;
+$color-blue: #3369F3;
+$color-grey: #FBFBFB;
+$color-red: #FF0000;
+$color-dark-grey: #999999;
+$color-background-input: #EFEFEF;
+$color-card-border: #EAEAEA;
+$color-light-blue: #E4EDFD;
+$color-background-message-grey: #F8F8F8;
+$color-background-message-blue: #E4EDFD;
+$color-menu-background: #F5F5F5;
+
+body, h1, p {
+    font-family: 'Times New Roman', Times, serif;
+    margin: 0;
+    overflow-y: hidden;
+}
+input {
+    padding: 0;
+    border: none;
+}
+
+::-webkit-scrollbar {
+    width: 1px;
+  }
+  
+  /* Оформление скроллбара */
+  ::-webkit-scrollbar-track {
+    background-color: $color-grey; /* цвет фона */
+  }
+  
+  /* Оформление бегунка скроллбара */
+  ::-webkit-scrollbar-thumb {
+    background-color: $color-blue; /* цвет бегунка */
+    border-radius: 10px; /* скругление углов бегунка */
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: $color-blue; 
+  }
+  

@@ -1,0 +1,37 @@
+---
+array: 
+    - {name: 'Андрей', time: '12:00', fromMe: true, unread: 0, text: 'Всем привет!Всем привет!Всем привет!Всем прив'}
+    - {name: 'Игорь', time: 'Пн', fromMe: false, unread: 0, text: 'Изображение'}
+    - {name: 'Катя', time: 'Ср', fromMe: false, unread: 4, text: 'Всем привет!Всем привет!Всем привет!Всем прив'}
+    - {name: 'Беседа 1', time: '1 Мая 2020', fromMe: true, unread: 0, text: 'Всем привет!Всем привет!Всем привет!Всем прив'}
+    - {name: 'Беседа', time: '12 Апр 2022', fromMe: false, unread: 8, text: 'Всем привет!Всем привет!Всем привет!Всем прив'}
+    - {name: 'Беседа', time: '12 Апр 2022', fromMe: false, unread: 8, text: 'Всем привет!Всем привет!Всем привет!Всем прив'}
+    - {name: 'Беседа', time: '12 Апр 2022', fromMe: false, unread: 8, text: 'Всем привет!Всем привет!Всем привет!Всем прив'}
+    - {name: 'Беседа', time: '12 Апр 2022', fromMe: false, unread: 8, text: 'Всем привет!Всем привет!Всем привет!Всем прив'}
+    - {name: 'Беседа', time: '12 Апр 2022', fromMe: false, unread: 8, text: 'Всем привет!Всем привет!Всем привет!Всем прив'}
+    - {name: 'Беседа', time: '12 Апр 2022', fromMe: false, unread: 8, text: 'Всем привет!Всем привет!Всем привет!Всем прив'}
+    - {name: 'Беседа', time: '12 Апр 2022', fromMe: false, unread: 8, text: 'Всем привет!Всем привет!Всем привет!Всем прив'}
+    - {name: 'Беседа', time: '12 Апр 2022', fromMe: false, unread: 8, text: 'Всем привет!Всем привет!Всем привет!Всем прив'}
+
+modalItemsTop: 
+    - {img: 'http://localhost:1234/asserts/modal-image.svg', text: 'Фото или Видео'}
+    - {img: 'http://localhost:1234/asserts/modal-file.svg', text: 'Файл'}
+    - {img: 'http://localhost:1234/asserts/modal-location.svg', text: 'Локация'}
+
+modalItemsBottom: 
+    - {img: 'http://localhost:1234/asserts/modal-image.svg', text: 'Добавить пользователя'}
+    - {img: 'http://localhost:1234/asserts/modal-file.svg', text: 'Удалить пользователя'}
+---
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../partials/main/main.scss">
+    <title>Main Page</title>
+</head>
+<body>
+    {{> main/main array=array modalItemsTop=modalItemsTop modalItemsBottom=modalItemsBottom }}
+</body>
+</html>
