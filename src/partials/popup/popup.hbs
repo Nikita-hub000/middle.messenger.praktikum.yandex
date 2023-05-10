@@ -4,15 +4,15 @@
         <h1 class="popup__header">{{title}}</h1>
         <label for="avatar" class="popup__label">Выбрать файл </br> на компьютере</label>
         <input class="popup__input-file" name="avatar" id="avatar" type="file"/>
-        <button class="popup__button">{{btnText}}</button>
+        <button type="submit" class="popup__button">{{btnText}}</button>
         <p class="popup__error popup__error-bottom">{{errorText}}</p>
     </form>
     {{/if}}
     {{#if (eq type 'agreement')}}
     <form class="popup__content">
         <h1 class="popup__header">{{title}}</h1>
-        <button class="popup__button popup__button-resolve">Да</button>
-        <button class="popup__button popup__button-reject">Нет</button>
+        <button type="button" class="popup__button popup__button-resolve">Да</button>
+        <button type="button" class="popup__button popup__button-reject">Нет</button>
     </form>
     {{/if}}
     {{#if (eq type 'form-text')}}
@@ -20,7 +20,7 @@
         <h1 class="popup__header">{{title}}</h1>
         <input class="popup__input" name="login" id="login-popup" placeholder="Логин" type="text"/>
         <label for="login-popup" class="popup__name">Логин</label>
-        <button class="popup__button">{{btnText}}</button>
+        <button type="submit" class="popup__button">{{btnText}}</button>
         <p class="popup__error popup__error-bottom">{{errorText}}</p>
     </form>
     {{/if}}
