@@ -1,4 +1,7 @@
 {
     "editor.formatOnSave": true,
-    "eslint.format.enable": true
+    "eslint.format.enable": true,
+    "files.insertFinalNewline": true,
+    "eslint.run": "onSave",
+    "prettier.singleQuote": true
 }

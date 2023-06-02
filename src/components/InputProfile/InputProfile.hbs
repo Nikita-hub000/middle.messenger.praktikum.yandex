@@ -1,0 +1,5 @@
+<div class="form__container">
+    <p class="form__header">{{this.label}}</p>
+    {{{error}}}
+    <input name="{{this.name}}" type="{{this.type}}" class="form__input" {{#if this.disabled}}disabled='true'{{/if}} value="{{this.value}}" />
+</div>

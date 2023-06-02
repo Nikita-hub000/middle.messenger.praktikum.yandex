@@ -1,0 +1,14 @@
+{
+    "extends": "stylelint-config-standard",
+    "rules": {
+      "color-hex-case": "upper",
+      "at-rule-no-unknown": "off",
+      "function-url-quotes": "off",
+      "import-notation": "off",
+      "rule-empty-line-before": "off"
+    },
+    "ignoreFiles": [
+      "dist/*",
+      "node_modules/*"
+    ]
+  } 

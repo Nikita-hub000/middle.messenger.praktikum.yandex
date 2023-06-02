@@ -1,0 +1,15 @@
+{
+  "extends": "airbnb",
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "rules": {
+    "no-console": "off",
+    "no-unused-vars": 2,
+    "max-len": [1, 100],
+    "max-params": [2, 3],
+    "semi": "error",
+    "class-methods-use-this": "off",
+    "no-underscore-dangle": "off",
+    "operator-linebreak": "off"
+  }
+}
