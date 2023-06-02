@@ -15,8 +15,5 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true
   },
-  "files": [
-    "./src/types/hbs.d.ts"
-    // Другие файлы проекта
-  ]
+  "files": ["./src/types/hbs.d.ts"]
 }
