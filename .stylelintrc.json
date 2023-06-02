@@ -2,10 +2,8 @@
     "extends": "stylelint-config-standard",
     "rules": {
       "color-hex-case": "upper",
-      "at-rule-no-unknown": [null, {
-        "ignoreAtRules": ["import"]
-      }],
-      "function-url-quotes": null
+      "at-rule-no-unknown": "off",
+      "function-url-quotes": "off"
     },
     "ignoreFiles": [
       "dist/*",
