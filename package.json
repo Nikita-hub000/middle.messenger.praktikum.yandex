@@ -4,7 +4,7 @@
   "description": "### Откройте pull request в ветку main из ветки, где вы разрабатывали проект, и добавьте ссылку на этот pr в README.md в ветке main.  ### ВАЖНО: pull request должен называться “Sprint i” (i — номер спринта).",
   "scripts": {
     "dev": "rm -rf dist && parcel --no-cache ./src/index.html --open --port 3000",
-    "build": "rm -rf dist && parcel build ./src/pages/index.hbs ./src/pages/error-400.hbs ./src/pages/error-500.hbs ./src/pages/login.hbs",
+    "build": "rm -rf dist && parcel build ./src/index.html",
     "start": "npm run build && node ./src/server.js"
   },
   "repository": {
