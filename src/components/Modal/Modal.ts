@@ -1,5 +1,5 @@
 import Block from '../../utils/Block';
-import ModalItemComponent, { ModalItemProps } from '../ModalItem/ModalItem';
+import ModalItemComponent, { ModalItemProps } from '../ModalItems/ModalItem';
 import template from './Modal.hbs';
 
 export type ModalProps = {
