@@ -3,7 +3,8 @@
     "rules": {
       "color-hex-case": "upper",
       "at-rule-no-unknown": "off",
-      "function-url-quotes": "off"
+      "function-url-quotes": "off",
+      "import-notation": "off"
     },
     "ignoreFiles": [
       "dist/*",
