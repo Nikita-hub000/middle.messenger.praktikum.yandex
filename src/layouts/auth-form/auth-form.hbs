@@ -1,0 +1,10 @@
+<form class="auth">
+    <h1 class="auth__title">{{title}}</h1>
+    <div class="auth__container">
+        {{#each fields}}
+            {{{this}}}
+        {{/each}}
+    </div>
+    {{{button}}}
+    <a href="{{linkHref}}" class="auth__link">{{linkText}}</a>
+</form>
