@@ -19,10 +19,21 @@
 - Главная страница - здесь находятся список чатов и компонент переписки
 - Профиль - страница Вашего Аккаунта, где можно редактировать пароль и другую информацию
 - Страница Ошибок - страницы для 500 и 400 ошибок
+
+Также была использована своя реализация MV* фреймворка с помощью самописных модулей:
+- EventBus
+- API class HTTP (замена fetch)
+- Шаблонизатор Handlebars
+
+Используемые технологии:
+- Typescript
+- SCSS
+- EsLint, Stylelint, Parcel
+
 ---
 ### Деплой 
 
 Проект можно посмотреть [здесь](https://silly-fox-fd65ec.netlify.app/)
 ---
-Pull request [#1](https://github.com/Nikita-hub000/middle.messenger.praktikum.yandex/pull/2)
+Pull request [#2](https://github.com/Nikita-hub000/middle.messenger.praktikum.yandex/pull/4)
 
