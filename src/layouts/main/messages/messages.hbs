@@ -1,0 +1,11 @@
+<div class="message-group__message {{#if fromMe}}message-group__message-my{{/if}} {{#if image}}message-group__message-image{{/if}}">
+    {{#if text}}
+    <p class="message-group__message__text">
+        {{text}}
+    </p>
+    {{else}}
+    <img class="message-group__message__image" src="{{image}}" />
+    {{/if}}
+    <p class="message-group__message__time {{#if fromMe}}message-group__message__time-my{{/if}} {{#if image}}message-group__message__time-image{{/if}}">{{#if fromMe}}<img src="../../../../asserts/two-marks.svg"/>{{/if}}{{time}}</p>
+</div>
+

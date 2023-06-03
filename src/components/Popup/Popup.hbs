@@ -1,0 +1,26 @@
+<section class="popup">
+    {{#if (eq type 'form-file')}}
+    <form class="popup__content">
+        <h1 class="popup__header">{{title}}</h1>
+        <label for="avatar" class="popup__label">Выбрать файл </br> на компьютере</label>
+        <input class="popup__input-file" name="avatar" id="avatar" type="file" accept=".png, .jpeg, .jpg"/>
+        {{{buttonFile}}}
+        <p class="popup__error popup__error-bottom">{{errorText}}</p>
+    </form>
+    {{/if}}
+    {{#if (eq type 'agreement')}}
+    <form class="popup__content">
+        <h1 class="popup__header">{{title}}</h1>
+        {{{buttonYes}}}
+        {{{buttonNo}}}
+    </form>
+    {{/if}}
+    {{#if (eq type 'form-text')}}
+    <form class="popup__content">
+        <h1 class="popup__header">{{title}}</h1>
+        {{{input}}}
+        {{{buttonText}}}
+        {{!-- <p class="popup__error popup__error-bottom">{{errorText}}</p> --}}
+    </form>
+    {{/if}}
+</section>

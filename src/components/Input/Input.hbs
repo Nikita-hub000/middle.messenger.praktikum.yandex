@@ -1,0 +1,5 @@
+<div class="auth__input-box"> 
+    <input class="{{#if (eq this.name 'password')}}auth__input auth__input-password{{else}}auth__input{{/if}}" name="{{this.name}}" id="{{this.name}}" placeholder="{{this.label}}" value="{{this.value}}" type="{{this.type}}" /> 
+    <label for="{{this.name}}" class="auth__label">{{this.label}}</label>
+    {{{error}}}
+</div>
