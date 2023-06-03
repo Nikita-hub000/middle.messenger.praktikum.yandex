@@ -6,10 +6,10 @@ enum METHODS {
 }
 
 type Options = {
-  method: METHODS;
+  method?: METHODS;
   timeout?: number;
   headers?: Record<string, string>;
-  data: XMLHttpRequestBodyInit;
+  data?: XMLHttpRequestBodyInit;
 };
 
 function queryStringify(data: XMLHttpRequestBodyInit): string {
@@ -18,22 +18,20 @@ function queryStringify(data: XMLHttpRequestBodyInit): string {
     .join('&')}`;
 }
 
+type HTTPMethod = (url: string, options?: Options) => Promise<unknown>;
+
 class HTTPTransport {
-  get = (url: string, options: Options) => {
+  get: HTTPMethod = (url, options = {}) =>
     this.request(url, { ...options, method: METHODS.GET }, options.timeout);
-  };
 
-  post = (url: string, options: Options) => {
-    this.request(url, { ...options, method: METHODS.POST }, options.timeout);
-  };
-
-  put = (url: string, options: Options) => {
+  put: HTTPMethod = (url, options = {}) =>
     this.request(url, { ...options, method: METHODS.PUT }, options.timeout);
-  };
 
-  delete = (url: string, options: Options) => {
+  post: HTTPMethod = (url, options = {}) =>
+    this.request(url, { ...options, method: METHODS.POST }, options.timeout);
+
+  delete: HTTPMethod = (url, options = {}) =>
     this.request(url, { ...options, method: METHODS.DELETE }, options.timeout);
-  };
 
   request = (url: string, options: Options, timeout: number = 5000) => {
     const { method, data, headers } = options;
