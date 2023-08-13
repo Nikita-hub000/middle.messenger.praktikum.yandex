@@ -6,6 +6,14 @@ import ImageComponent from '../../components/Image/Image';
 import ButtonImage from '../../components/ButtonImage/ButtonImage';
 import InputProfile from '../../components/InputProfile/InputProfile';
 import validation, { FieldTypes } from '../../utils/Validation';
+import { router } from '../../router';
+import ButtonLine from '../../components/ButtonLine/ButtonLine';
+import { AuthControllerObject } from '../../controllers/auth';
+import { store } from '../../utils/Store';
+import { UsersControllerObject } from '../../controllers/users';
+import { ChangePasswordProps, ChangeProfileProps } from '../../api/users';
+import InputAvatar from '../../components/InputAvatar/InputAvatar';
+import defaultImg from '../../../asserts/profile-default-img.svg';
 
 export type UserInfo = {
   label: string;
@@ -38,33 +46,120 @@ class ProfilePage extends Block {
     this.children.inputs = this.props.userInfo.map(
       (item: UserInfo) => new InputProfile(item)
     );
+    this.children.inputAvatar = new InputAvatar({
+      events: {
+        change: (e: Event) => {
+          e.preventDefault();
+          const target = e.target as HTMLInputElement;
+
+          if (target.files && target.files.length > 0) {
+            const file = target.files[0];
+            console.log(file);
+            const formData = new FormData();
+            formData.append('avatar', file);
+            console.log(formData.get('avatar'));
+            UsersControllerObject.changeProfileAvatar({
+              avatar: formData,
+            });
+          }
+        },
+      },
+    });
     this.children.buttonBack = new ButtonImage({
       class: 'chat__send-reverse',
       events: {
         click: (e) => {
           e.preventDefault();
-          window.location.assign('/');
+          router.back();
         },
       },
     });
-    if (isEditPassword || isEditProfile) {
+    this.children.buttonExit = new ButtonLine({
+      label: 'Выйти',
+      events: {
+        click: (e) => {
+          e.preventDefault();
+          AuthControllerObject.logout();
+        },
+      },
+    });
+    if (isEditProfile) {
       this.children.buttonSave = new Button({
         label: 'Сохранить',
         events: {
           click: (e) => {
             e.preventDefault();
+            let error = false;
             const inputs = document.querySelectorAll('input');
+            const data = Array.from(inputs).reduce((acc, item) => {
+              acc[item.name] = item.value;
+              return acc;
+            }, {} as ChangeProfileProps);
+
             this.children.inputs.forEach((item, id) => {
               if (validation(FieldTypes[inputs[id].name], inputs[id].value)) {
                 item.children.error.hide();
+                error = false;
               } else {
                 item.children.error.show();
+                error = true;
               }
             });
+            if (!error) {
+              UsersControllerObject.changeProfile(data);
+            }
           },
         },
       });
     }
+    if (isEditPassword) {
+      this.children.buttonSave = new Button({
+        label: 'Сохранить',
+        events: {
+          click: (e) => {
+            e.preventDefault();
+            let error = false;
+            const inputs = document.querySelectorAll('input');
+            const data = Array.from(inputs).reduce((acc, item) => {
+              if (item.name === 'oldPassword' || item.name === 'newPassword') {
+                console.log(item.name);
+                acc[item.name] = item.value;
+              }
+              return acc;
+            }, {} as ChangePasswordProps);
+            this.children.inputs.forEach((item, id) => {
+              if (validation(FieldTypes[inputs[id].name], inputs[id].value)) {
+                item.children.error.hide();
+                error = false;
+              } else {
+                item.children.error.show();
+                error = true;
+              }
+            });
+
+            if (!error) {
+              if (inputs[1].value !== inputs[2].value) {
+                this.children.inputs[2].children.error.show();
+              } else {
+                this.children.inputs[2].children.error.hide();
+                UsersControllerObject.changePassword(data);
+              }
+            }
+          },
+        },
+      });
+    }
+    this.children.image = new ImageComponent({
+      src: defaultImg,
+      default: true,
+      events: {
+        click: (e) => {
+          e.preventDefault();
+          const avatar = document.getElementById('avatar');
+          avatar?.click();
+        },
+      },
+    });
     this.children.popupFile = new Popup({
       title: 'Загрузите файл',
       type: PopupTypes.FORM_FILE,
@@ -80,16 +175,27 @@ class ProfilePage extends Block {
         },
       },
     });
-    this.children.image = new ImageComponent({
-      src: this.props.imageSrc,
-      events: {
-        click: (e) => {
-          e.preventDefault();
-          this.children.popupFile.show();
-        },
-      },
-    });
     this.children.popupFile.hide();
+  }
+
+  async componentDidMount(): Promise<void> {
+    await AuthControllerObject.getUserInfo();
+    const info = store.getState()?.user;
+    console.log(info);
+    if (info) {
+      console.log(store.getState()?.user);
+      this.children.image.setProps({
+        src: info.avatar,
+        default: !info.avatar,
+      });
+
+      this.children.inputs.forEach((element) => {
+        const { value, ...propsElement } = element.props;
+        if (!!info[element.props.name]) {
+          element.setProps({ value: info[element.props.name], propsElement });
+        }
+      });
+    }
   }
 
   protected render(): DocumentFragment {

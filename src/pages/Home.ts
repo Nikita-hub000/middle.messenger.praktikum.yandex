@@ -1,16 +1,12 @@
 import MainPage from '../layouts/main/main';
 import registerHelpers from '../utils/RegisterHelpers';
-import chats from '../constants/data';
+import { withStore } from '../utils/Store';
+import { withRouter } from '../utils/withRouter';
 
 registerHelpers();
 
-const Home = new MainPage({
-  current: {
-    id: '0',
-    name: '',
-    messages: [],
-  },
-  chats: chats,
-});
+function mapStateProps(state: any) {
+  return { ...state.chats, ...state.messages, ...state.currentUser };
+}
 
-export default Home;
+export default withRouter(withStore(mapStateProps)(MainPage));

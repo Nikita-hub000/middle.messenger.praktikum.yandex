@@ -1,11 +1,14 @@
 import Block from '../../../utils/Block';
 import template from './messages.hbs';
+import readImg from '../../../../asserts/two-marks.svg';
 
 export type MessageProps = {
-  text?: string;
-  image?: string;
-  time: string;
+  content?: string;
+  file?: string;
+  date: string;
   fromMe: boolean;
+  imgRead: string;
+  is_read: boolean;
 };
 
 export type CurrentChatProps = {
@@ -22,6 +25,7 @@ class MessageComponent extends Block {
   }
 
   protected render(): DocumentFragment {
+    this.props.imgRead = readImg;
     return this.compile(template, this.props);
   }
 }

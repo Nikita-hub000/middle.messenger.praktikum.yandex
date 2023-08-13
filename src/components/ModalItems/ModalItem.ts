@@ -4,6 +4,7 @@ import template from './ModalItem.hbs';
 export type ModalItemProps = {
   img: string;
   text: string;
+  class?: string;
   events?: {
     click: () => void;
   };
