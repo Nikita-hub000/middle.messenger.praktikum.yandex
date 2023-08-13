@@ -6,6 +6,7 @@ export type ImageProps = {
   events: {
     click: (evt: PointerEvent) => void;
   };
+  default: boolean;
 };
 
 class ImageComponent extends Block {

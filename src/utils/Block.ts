@@ -1,11 +1,13 @@
 import { nanoid } from 'nanoid';
 import EventBus from './EventBus.ts';
-
+import { cloneDeep, isEqual } from '../helpers/coreFunc.ts';
+let counter = 0;
 abstract class Block<Prop extends Record<string, any> = unknown> {
   static EVENTS = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
     FLOW_CDU: 'flow:component-did-update',
+    FLOW_CWU: 'flow:component-will-unmount',
     FLOW_RENDER: 'flow:render',
   };
 
@@ -92,6 +94,7 @@ abstract class Block<Prop extends Record<string, any> = unknown> {
     eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
     eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
+    eventBus.on(Block.EVENTS.FLOW_CWU, this._componentWillUnmount.bind(this));
   }
 
   _createResources() {
@@ -109,18 +112,39 @@ abstract class Block<Prop extends Record<string, any> = unknown> {
 
   protected init() {}
 
+  _checkInDom() {
+    // const elementInDOM = document.body.contains(this._element);
+    // if (!elementInDOM) {
+    //   setTimeout(() => this._checkInDom(), 1000);
+    //   return;
+    // }
+    // this.eventBus().emit(Block.EVENTS.FLOW_CWU, this.props);
+  }
+
   _componentDidMount() {
+    this._checkInDom();
     this.componentDidMount();
   }
 
   componentDidMount() {}
 
+  private _componentWillUnmount() {
+    this.eventBus().destroy();
+    this.componentWillUnmount();
+  }
+
+  protected componentWillUnmount() {}
+
   public dispatchComponentDidMount() {
     this.eventBus().emit(Block.EVENTS.FLOW_CDM);
 
-    Object.values(this.children).forEach((child) =>
-      child.dispatchComponentDidMount()
-    );
+    Object.values(this.children).forEach((child) => {
+      try {
+        child.dispatchComponentDidMount();
+      } catch (error) {
+        console.log(error);
+      }
+    });
   }
 
   public dispatchComponentDidUpdate() {
@@ -134,6 +158,9 @@ abstract class Block<Prop extends Record<string, any> = unknown> {
   }
 
   protected componentDidUpdate(oldProps: any, newProps: any) {
+    if (oldProps && newProps) {
+      return !isEqual(oldProps, newProps);
+    }
     return true;
   }
 
@@ -141,8 +168,12 @@ abstract class Block<Prop extends Record<string, any> = unknown> {
     if (!nextProps) {
       return;
     }
+    const props = cloneDeep(this.props);
+    const newProps = cloneDeep({ ...props, ...nextProps });
 
     Object.assign(this.props, nextProps);
+
+    this.eventBus().emit(Block.EVENTS.FLOW_CDU, props, newProps);
   };
 
   get element() {
@@ -159,6 +190,10 @@ abstract class Block<Prop extends Record<string, any> = unknown> {
     this._element = newElement;
 
     this._addEvents();
+    counter += 1;
+    console.log('render', counter);
+    this.eventBus().emit(Block.EVENTS.FLOW_CDM);
+    this.prevProps = cloneDeep(this.props);
   }
 
   protected compile(template: (context: any) => string, context: any) {
@@ -237,6 +272,10 @@ abstract class Block<Prop extends Record<string, any> = unknown> {
 
   hide() {
     this.getContent()!.style.display = 'none';
+  }
+
+  public destroy() {
+    this._element!.remove();
   }
 }
 

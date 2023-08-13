@@ -19,6 +19,14 @@
             overflow-y: scroll;
             width: calc(25vw + 1px);
         }
+
+        &-row {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin: 0 10px;
+            justify-content: space-between;
+        }
     }
 
     &__default-text {
@@ -41,8 +49,6 @@
         font-weight: 500;
         font-size: 15px;
         text-decoration: none;
-        margin-left: 74%;
-        margin-right: 10px;
         margin-top: 21px;
         display: flex;
         flex-direction: row;
@@ -52,7 +58,7 @@
     &__image {
         margin-top: 2px;
         margin-left: 8px;
-        background-image: url('./asserts/arrow.png');
+        background-image: url('../asserts/arrow.png');
         width: 10px;
         height: 10px;
         background-position: center;
@@ -66,7 +72,7 @@
         background: $color-background-input;
         border-radius: 5px;
         border-color: $color-background-input;
-        background-image: url('./asserts/find.png');
+        background-image: url('../asserts/find.png');
         background-position: 40% center; 
         background-repeat: no-repeat;
         text-align: center;
@@ -145,11 +151,26 @@
         width: 25px;
         height: 25px;
         position: relative;
-        background-image: url('./asserts/menu.svg');
+        background-image: url('../asserts/menu.svg');
         background-color: $color-menu-background;
         border-radius: 50%;
         background-position: center;
         border-color: transparent;
+    }
+
+    &__add {
+        margin-right: 10px;
+        cursor: pointer;
+        width: 25px;
+        height: 25px;
+        position: relative;
+        background-image: url('../asserts/add.svg');
+        transform: rotate(45deg);
+        background-color: $color-menu-background;
+        border-radius: 50%;
+        
+        background-position: center;
+        border: 1px solid $color-blue;
     }
 
     &__messenger {
@@ -178,7 +199,7 @@
         width: 32px;
         height: 32px;
         cursor: pointer;
-        background-image: url('./asserts/attach-file.svg');
+        background-image: url('../asserts/attach-file.svg');
         background-position: center;
         border-color: transparent;
         background-color: white;
@@ -213,7 +234,7 @@
     &__send {
         width: 28px;
         height: 28px;
-        background-image: url('./asserts/send-message.svg');
+        background-image: url('../asserts/send-message.svg');
         background-position: center;
         border-radius: 50%;
         border: transparent;
@@ -223,7 +244,7 @@
         &-reverse {
             width: 28px;
             height: 28px;
-            background-image: url('./asserts/send-message.svg');
+            background-image: url('../asserts/send-message.svg');
             background-position: center;
             border-radius: 50%;
             border: transparent;

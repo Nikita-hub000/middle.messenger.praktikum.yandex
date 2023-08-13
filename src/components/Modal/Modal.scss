@@ -41,4 +41,15 @@
         font-size: 12px;
         color: $color-black;
     }
+
+    &__add {
+        transform: rotate(45deg);
+        border-radius: 50%;
+        border: 1px solid $color-blue;
+    }
+
+    &__delete {
+        border-radius: 50%;
+        border: 1px solid $color-blue; 
+    }
 }

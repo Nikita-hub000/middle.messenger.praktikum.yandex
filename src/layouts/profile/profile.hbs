@@ -1,10 +1,12 @@
 <section class="profile">
     <nav class="profile__back">
         {{{buttonBack}}}
-    </nav>
+    </nav>              
+
     {{#if (eq isEditPassword isEditProfile)}}
     <main class="profile__main">
         {{{image}}}
+        {{{inputAvatar}}}
         <h1 class="profile__main__header">{{first_name}}</h1>
         <form class="form">
             {{#each inputs}}
@@ -12,13 +14,13 @@
             {{/each}}
             <div class="form">
                 <div class="form__container">
-                    <a href="profile/edit-info" class="form__header form__header-blue">Изменить данные</a>
+                    <a href="settings/info" class="form__header form__header-blue">Изменить данные</a>
                 </div>
                 <div class="form__container">
-                    <a href="profile/edit-password" class="form__header form__header-blue">Изменить пароль</a>
+                    <a href="settings/password" class="form__header form__header-blue">Изменить пароль</a>
                 </div>
                 <div class="form__container">
-                    <button type="submit" class="form__header form__header-red">Выйти</button>
+                    {{{buttonExit}}}
                 </div>            
             </div>
         </form>
@@ -46,5 +48,5 @@
         </form>
     </main>
     {{/if}}
-    {{{popupFile}}}
-</section>
+    {{{popupFile}}}   
+    </section>

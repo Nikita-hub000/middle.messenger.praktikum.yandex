@@ -61,25 +61,6 @@ class Popup extends Block {
           },
           value: '',
         });
-        this.props.button.events = {
-          click: (e) => {
-            e.preventDefault();
-            console.log(
-              this.children.input.children.error,
-              document.querySelector(
-                `.${this.children.input.element?.classList[0]}`
-              )
-            );
-            // const inputs = document.querySelectorAll('input');
-            // this.children.fields.forEach((item, id) => {
-            //   if (validation(FieldTypes[inputs[id].name], inputs[id].value)) {
-            //     item.children.error.hide();
-            //   } else {
-            //     item.children.error.show();
-            //   }
-            // });
-          },
-        };
         this.children.buttonText = new Button(this.props.button);
         break;
 

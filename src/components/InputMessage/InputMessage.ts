@@ -17,6 +17,12 @@ class InputMessage extends Block {
   }
 
   protected init() {
+    this.children.button = new ButtonImage({
+      class: 'chat__send',
+      events: {
+        click: this.props.events.click,
+      },
+    });
     this.props.events = {
       focusin: (e) => {
         if (validation(FieldTypes.message, e.target.value)) {
@@ -33,24 +39,6 @@ class InputMessage extends Block {
         }
       },
     };
-    this.children.button = new ButtonImage({
-      class: 'chat__send',
-      events: {
-        click: (e) => {
-          e.preventDefault();
-          if (
-            validation(
-              FieldTypes.message,
-              document.querySelector('.chat__input').value
-            )
-          ) {
-            this.children.error.hide();
-          } else {
-            this.children.error.show();
-          }
-        },
-      },
-    });
     this.children.error = new ErrorComponent({
       text: 'Сообщение не может быть пустым',
       class: 'chat__error',
