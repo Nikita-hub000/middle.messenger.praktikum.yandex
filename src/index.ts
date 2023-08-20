@@ -5,10 +5,9 @@ import { store } from './utils/Store';
 import { AuthControllerObject } from './controllers/auth';
 
 registerHelpers();
+initRouter();
+console.log(router);
 window.addEventListener('DOMContentLoaded', async () => {
-  initRouter();
-  console.log(router);
-
   try {
     await AuthControllerObject.getUserInfo();
     if (
