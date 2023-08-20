@@ -17,8 +17,14 @@
     &__icon {
         width: 47px;
         height: 47px;
+        max-width: 47px;
+        max-height: 47px;
         border-radius: 50%;
         background-color: $color-background-input;
+        border: transparent;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     &__container {

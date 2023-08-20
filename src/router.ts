@@ -5,12 +5,11 @@ export const router = new Router('#app');
 import Login from './pages/Login';
 import validation, { FieldTypes } from './utils/Validation';
 import MainPage from './pages/Home';
-import chats from './constants/data';
 import ProfilePage from './pages/Profle';
 import ErrorPage from './pages/Error';
 
 export function initRouter() {
-  router
+  return router
     .use({
       pathname: '/',
       block: Login,

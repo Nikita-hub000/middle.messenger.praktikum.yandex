@@ -5,6 +5,8 @@ export type InputAvatarProps = {
   events?: {
     change: () => void;
   };
+  chatId?: number;
+  isChat?: boolean;
 };
 
 class InputAvatar extends Block {

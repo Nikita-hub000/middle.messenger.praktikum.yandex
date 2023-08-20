@@ -74,7 +74,7 @@ class HTTPTransport {
         reject(new Error('Request timeout'));
       };
 
-      if (headers) {
+      if (headers && !(data instanceof FormData)) {
         Object.entries(headers).forEach(([key, value]) => {
           xhr.setRequestHeader(key, value);
         });
@@ -89,11 +89,19 @@ class HTTPTransport {
         } else {
           xhr.open(method, url);
         }
+
         xhr.send();
       } else {
         xhr.open(method, url);
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.send(JSON.stringify(data));
+        console.log(data);
+        if (data instanceof FormData || data?.avatar instanceof FormData) {
+          console.log('data');
+
+          xhr.send(data);
+        } else {
+          xhr.setRequestHeader('Content-Type', 'application/json');
+          xhr.send(JSON.stringify(data));
+        }
       }
     });
   };

@@ -31,7 +31,7 @@ class UsersController {
     }
   }
 
-  async changeProfileAvatar(data: ChangeProfileAvatarProps) {
+  async changeProfileAvatar(data: FormData) {
     try {
       const result = await UsersApi.changeProfileAvatar(data);
       if (isSuccessApi(result)) {

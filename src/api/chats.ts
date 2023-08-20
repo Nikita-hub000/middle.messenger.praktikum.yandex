@@ -16,6 +16,11 @@ export type PostTokenProps = {
   id: number;
 };
 
+export type AddChatAvatarProps = {
+  chatId: number;
+  avatar: FormData;
+};
+
 const api = new HTTPTransport();
 class ChatsApi {
   static async getChats() {
@@ -33,6 +38,14 @@ class ChatsApi {
 
   static async addUser(data: AddUserProps) {
     const answer = await api.put('/chats/users', {
+      data,
+      timeout: 5000,
+    });
+    return answer;
+  }
+
+  static async addChatAvatar(data: AddChatAvatarProps) {
+    const answer = await api.put('/chats/avatar', {
       data,
       timeout: 5000,
     });
