@@ -1,0 +1,15 @@
+{{#if (isBothTrue default isSide)}}
+<div class="card__icon"></div>
+{{/if}}
+
+{{#if default}} 
+{{#unless isSide}}
+<button class="card__icon"></button>
+{{/unless}}
+{{/if}}
+
+{{#unless default}}
+<div class="card__icon">
+    <img class="chat__avatar" src="{{src}}"/>
+</div>
+{{/unless}}

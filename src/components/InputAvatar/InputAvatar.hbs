@@ -1,1 +1,8 @@
-<input style="width: 0; height: 0;" type="file" id="avatar" accept=".png, .jpg, .jpeg" />
+<form>
+<input type="file" style="width: 0; height: 0;" id="avatar" name="avatar" accept=".png, .jpg, .jpeg" />
+{{#if isChat}}
+<input type="text" style="width: 0; height: 0;" id="chatId" name="chatId" value="{{chatId}}"  />
+
+{{/if}}
+</form>
+

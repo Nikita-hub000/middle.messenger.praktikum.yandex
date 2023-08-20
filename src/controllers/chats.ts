@@ -1,4 +1,5 @@
 import ChatsApi, {
+  AddChatAvatarProps,
   AddUserProps,
   CreateChatProps,
   DeleteChatProps,
@@ -29,6 +30,18 @@ class ChatsController {
         });
         store.set('chats.menu', JSON.parse(result.response));
       }
+    } catch (e: any) {
+      console.log(e);
+    }
+  }
+
+  async addChatAvatar(data: AddChatAvatarProps) {
+    try {
+      const result = await ChatsApi.addChatAvatar(data);
+      // if (isSuccessApi(result)) {
+      //   // store.set('chats.menu', JSON.parse(result.response));
+      // }
+      return result;
     } catch (e: any) {
       console.log(e);
     }

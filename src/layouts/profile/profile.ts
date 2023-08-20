@@ -48,23 +48,10 @@ class ProfilePage extends Block {
     );
     this.children.inputAvatar = new InputAvatar({
       events: {
-        change: (e: Event) => {
-          e.preventDefault();
-          const target = e.target as HTMLInputElement;
-
-          if (target.files && target.files.length > 0) {
-            const file = target.files[0];
-            console.log(file);
-            const formData = new FormData();
-            formData.append('avatar', file);
-            console.log(formData.get('avatar'));
-            UsersControllerObject.changeProfileAvatar({
-              avatar: formData,
-            });
-          }
-        },
+        change: (e: Event) => this.changeImg(e),
       },
     });
+
     this.children.buttonBack = new ButtonImage({
       class: 'chat__send-reverse',
       events: {
@@ -87,7 +74,7 @@ class ProfilePage extends Block {
       this.children.buttonSave = new Button({
         label: 'Сохранить',
         events: {
-          click: (e) => {
+          click: async (e) => {
             e.preventDefault();
             let error = false;
             const inputs = document.querySelectorAll('input');
@@ -106,7 +93,8 @@ class ProfilePage extends Block {
               }
             });
             if (!error) {
-              UsersControllerObject.changeProfile(data);
+              await UsersControllerObject.changeProfile(data);
+              this.dispatchComponentDidMount();
             }
           },
         },
@@ -176,6 +164,19 @@ class ProfilePage extends Block {
       },
     });
     this.children.popupFile.hide();
+  }
+  changeImg(e: Event) {
+    const target = e.target as HTMLInputElement;
+
+    if (target.files && target.files.length > 0) {
+      const file = target.files[0];
+      console.log(file);
+      const formData = new FormData();
+      formData.append('avatar', file);
+      console.log(formData.entries);
+
+      UsersControllerObject.changeProfileAvatar(formData);
+    }
   }
 
   async componentDidMount(): Promise<void> {

@@ -7,6 +7,7 @@ import { AuthControllerObject } from './controllers/auth';
 registerHelpers();
 window.addEventListener('DOMContentLoaded', async () => {
   initRouter();
+  console.log(router);
 
   try {
     await AuthControllerObject.getUserInfo();
@@ -15,6 +16,11 @@ window.addEventListener('DOMContentLoaded', async () => {
       window.location.pathname !== '/sign-up'
     ) {
       router.go('/');
+    } else if (
+      !store.getState()?.user?.id &&
+      window.location.pathname === '/sign-up'
+    ) {
+      return;
     } else if (
       window.location.pathname === '/' ||
       window.location.pathname === '/sign-up'

@@ -28,7 +28,7 @@ class UsersApi {
     return answer;
   }
 
-  static async changeProfileAvatar(data: ChangeProfileAvatarProps) {
+  static async changeProfileAvatar(data: FormData) {
     const answer = await api.put('/user/profile/avatar', {
       data,
       timeout: 5000,

@@ -18,6 +18,8 @@ import modalFile from '../../../asserts/modal-file.svg';
 import modalLocation from '../../../asserts/modal-location.svg';
 import { sendMessage } from '../../utils/WS';
 import addImg from '../../../asserts/add.svg';
+import ChatImageComponent from '../../components/ChatImage/ChatImage';
+import InputAvatar from '../../components/InputAvatar/InputAvatar';
 
 export type MainPageProps = {
   chats: ChatProps[];
@@ -33,6 +35,18 @@ class MainPage extends Block {
   }
 
   protected init(): void {
+    this.children.avatar = new ChatImageComponent({
+      src: this.props.current.chatAvatar,
+      default: !this.props.current.chatAvatar,
+      isSide: false,
+      events: {
+        click: (e) => {
+          e.preventDefault();
+          const avatar = document.getElementById('avatar');
+          avatar?.click();
+        },
+      },
+    });
     this.children.chats = [];
     this.children.input = new InputMessage({
       events: {
@@ -55,6 +69,7 @@ class MainPage extends Block {
                 id: current.id,
                 name: current.name,
                 messages: store.getState().messages?.[current.id] || [],
+                chatAvatar: current.chatAvatar,
               },
               ...oldProps,
             });
@@ -81,6 +96,7 @@ class MainPage extends Block {
               id: '0',
               name: '',
               messages: [],
+              chatAvatar: '',
             },
             ...oldProps,
           });
@@ -280,6 +296,9 @@ class MainPage extends Block {
       for (let i = 0; i < chatsInfo.length; i++) {
         const propsObj: ChatProps = {
           id: chatsInfo[i].id,
+          avatar: !!chatsInfo[i].avatar
+            ? `https://ya-praktikum.tech/api/v2/resources${chatsInfo[i].avatar}`
+            : '',
           name: chatsInfo[i].title,
           unread: chatsInfo[i].unread_count,
           fromMe: chatsInfo[i]?.last_message?.user?.login === userInfo.login,
@@ -300,10 +319,12 @@ class MainPage extends Block {
                   id: chatsInfo[i].id,
                   name: chatsInfo[i].title,
                   messages,
+                  chatAvatar: !!chatsInfo[i].avatar
+                    ? `https://ya-praktikum.tech/api/v2/resources${chatsInfo[i].avatar}`
+                    : '',
                 },
                 ...oldProps,
               });
-              console.log(0);
               this.firstRenderCompleted = false;
               this.dispatchComponentDidMount();
             },
@@ -323,6 +344,49 @@ class MainPage extends Block {
     const messages = store.getState().messages?.[this.props.current.id] || [];
 
     this.firstRenderCompleted = true;
+
+    this.children.inputAvatar = new InputAvatar({
+      chatId: this.props.current.id,
+      isChat: true,
+      events: {
+        change: async (e: Event) => {
+          const target = e.target as HTMLInputElement;
+
+          if (target.files && target.files.length > 0) {
+            const formData = new FormData(target.parentNode);
+
+            const res = await ChatsControllerObject.addChatAvatar(formData);
+            this.setProps({
+              current: {
+                id: this.props.current.id,
+                name: this.props.current.name,
+                messages: this.props.current.messages,
+                chatAvatar: `https://ya-praktikum.tech/api/v2/resources${
+                  JSON.parse(res.response).avatar
+                }`,
+              },
+            });
+            // console.log(JSON.parse(res.response).avatar);
+          }
+
+          this.firstRenderCompleted = false;
+          this.dispatchComponentDidMount();
+        },
+      },
+    });
+
+    this.children.avatar = new ChatImageComponent({
+      src: this.props.current.chatAvatar,
+      default: !this.props.current.chatAvatar,
+      isSide: false,
+      events: {
+        click: (e) => {
+          e.preventDefault();
+          const avatar = document.getElementById('avatar');
+          avatar?.click();
+        },
+      },
+    });
 
     this.children.chats = chats.map((chatProps: ChatProps) => {
       return new ChatsComponent(chatProps);
