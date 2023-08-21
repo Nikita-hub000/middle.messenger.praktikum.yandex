@@ -2,8 +2,8 @@
     {{#if (eq type 'form-file')}}
     <form class="popup__content">
         <h1 class="popup__header">{{title}}</h1>
+        <input class="popup__input-file" id="avatar" type="file" />
         <label for="avatar" class="popup__label">Выбрать файл </br> на компьютере</label>
-        <input class="popup__input-file" name="avatar" id="avatar" type="file" accept=".png, .jpeg, .jpg"/>
         {{{buttonFile}}}
         <p class="popup__error popup__error-bottom">{{errorText}}</p>
     </form>

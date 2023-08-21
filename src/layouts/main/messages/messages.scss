@@ -11,6 +11,10 @@
         margin: 20px auto 30px;
     }
 
+    &__readed {
+        margin-right: 2px;
+    }
+
     &__message {
         position: relative;
         background-color: $color-background-message-grey;

@@ -1,49 +1,36 @@
-import renderDOM from './utils/renderDOM';
 import './types/hbs.d.ts';
-import Home from './pages/Home';
-import Login from './pages/Login';
-import Error400 from './pages/Error-400';
-import Registration from './pages/Registration';
-import Error500 from './pages/Error-500';
-import Profile from './pages/Profle';
-import EditPassword from './pages/ProfileChangePassword';
-import EditInfo from './pages/ProfileChangeInfo';
+import { initRouter, router } from './router';
+import registerHelpers from './utils/RegisterHelpers';
+import { store } from './utils/Store';
+import { AuthControllerObject } from './controllers/auth';
 
-window.addEventListener('DOMContentLoaded', () => {
-  switch (window.location.pathname) {
-    case '/error-400': {
-      renderDOM(Error400);
-      break;
+registerHelpers();
+initRouter();
+console.log(router);
+window.addEventListener('DOMContentLoaded', async () => {
+  try {
+    await AuthControllerObject.getUserInfo();
+    if (
+      !store.getState()?.user?.id &&
+      window.location.pathname !== '/sign-up'
+    ) {
+      router.go('/');
+    } else if (
+      !store.getState()?.user?.id &&
+      window.location.pathname === '/sign-up'
+    ) {
+      return;
+    } else if (
+      window.location.pathname === '/' ||
+      window.location.pathname === '/sign-up'
+    ) {
+      router.go('/messenger');
     }
-    case '/error-500': {
-      renderDOM(Error500);
-      break;
+  } catch (e) {
+    if (store.getState()?.user?.id) {
+      console.log('authorized');
+    } else {
+      router.go('/');
     }
-    case '/login': {
-      renderDOM(Login);
-      break;
-    }
-    case '/registration': {
-      renderDOM(Registration);
-      break;
-    }
-    case '/': {
-      renderDOM(Home);
-      break;
-    }
-    case '/profile': {
-      renderDOM(Profile);
-      break;
-    }
-    case '/profile/edit-password': {
-      renderDOM(EditPassword);
-      break;
-    }
-    case '/profile/edit-info': {
-      renderDOM(EditInfo);
-      break;
-    }
-    default:
-      break;
   }
 });

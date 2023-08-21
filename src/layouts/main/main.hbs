@@ -1,14 +1,18 @@
 <section class="main-page">
     <nav class="main-page__chats-menu">
-        <a class="main-page__link" href="/profile">Профиль {{{buttonProfile}}}</a>
+        <div class="main-page__chats-menu-row">
+        {{{buttonAddChat}}}
+        <a class="main-page__link" href="/settings">Профиль {{{buttonProfile}}}</a>
+        </div>
         <form class="main-page__form">
             <input type="text" class="main-page__find" placeholder="Поиск"/>
         </form>
+        {{#if chats}}
         {{#each chats}}
             {{{this}}}
         {{/each}}
+        {{/if}}
     </nav>
-    {{!-- Уже сверстано --}}
     {{#if (eq current.id '0')}}
     <main class="main-page__chat-default">
         <p class="main-page__default-text">Выберите чат чтобы отправить сообщение</p>
@@ -16,18 +20,20 @@
     {{else}}
     <main class="chat">
         <div class="chat__header">
-            <div class="chat__icon"></div> {{!-- потом поменяю на img --}}
+            {{{avatar}}}
+            {{{inputAvatar}}}
             <h1 class="chat__name">{{current.name}}</h1>
             {{{buttonMenu}}}
             {{{modalMenu}}}
         </div>
         <div class="chat__messenger">
         <section class="message-group">
-            <p class="message-group__date">19 июня</p>
+            <p class="message-group__date"></p>
             {{#each messages}}
                 {{{this}}}
             {{/each}}
         </section>
+
         </div>
         <div class="chat__footer">
             {{{modalAttach}}}
@@ -39,4 +45,5 @@
     {{{popupAgreement}}}
     {{{popupAddUser}}}
     {{{popupDeleteUser}}}
+    {{{popupAddChat}}}
 </section>

@@ -16,14 +16,6 @@ class Modal extends Block {
     this.children.items = this.props.items.map(
       (prop: ModalItemProps) => new ModalItemComponent(prop)
     );
-    document.addEventListener('click', (e) => {
-      // if (
-      //   this.element.style.display === 'flex' &&
-      //   e.target.classList[0].slice(0, 5) !== 'modal'
-      // ) {
-      //   this.hide();
-      // }
-    });
   }
 
   render() {

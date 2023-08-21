@@ -29,6 +29,10 @@ class EventBus {
       listener(...args);
     });
   }
+
+  destroy() {
+    this.listeners = {};
+  }
 }
 
 export default EventBus;

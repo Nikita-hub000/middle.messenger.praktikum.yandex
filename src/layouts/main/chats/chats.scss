@@ -3,8 +3,7 @@
     flex-direction: row;
     border-bottom: 1px solid $color-card-border;
     border-collapse: collapse;
-    padding: 12px 0;
-    margin: 0 10px;
+    padding: 12px 10px;
     cursor: pointer;
 
     &:hover {
@@ -18,8 +17,14 @@
     &__icon {
         width: 47px;
         height: 47px;
+        max-width: 47px;
+        max-height: 47px;
         border-radius: 50%;
         background-color: $color-background-input;
+        border: transparent;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     &__container {

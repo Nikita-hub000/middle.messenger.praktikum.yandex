@@ -3,9 +3,12 @@ export enum FieldTypes {
   second_name = 'second_name',
   login = 'login',
   password = 'password',
+  newPassword = 'newPassword'
+  oldPassword = 'oldPassword'
   email = 'email',
   phone = 'phone',
   message = 'message',
+  display_name = 'display_name',
 }
 
 const nameRegex =
@@ -27,11 +30,21 @@ const validation = (field: FieldTypes, value: string): boolean | void => {
     case FieldTypes.first_name:
       return nameRegex.test(value);
 
+    case FieldTypes.display_name:
+      return nameRegex.test(value);
+
     case FieldTypes.second_name:
       return nameRegex.test(value);
 
     case FieldTypes.password:
       return passwordRegex.test(value);
+
+      case FieldTypes.oldPassword:
+        return passwordRegex.test(value);
+
+      case FieldTypes.newPassword:
+          return passwordRegex.test(value);
+
 
     case FieldTypes.message:
       return messageRegex.test(value);

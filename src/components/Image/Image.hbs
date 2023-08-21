@@ -1,3 +1,3 @@
-<button class="profile__main__image profile__main__image-default">
-    <img src="{{src}}"/>
+<button class="profile__main__image {{#if default}}profile__main__image-default{{/if}}">
+    <img class="{{#unless default}}profile__image{{/unless}}" src="{{src}}"/>
 </button>
